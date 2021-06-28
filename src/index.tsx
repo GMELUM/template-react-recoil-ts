@@ -9,16 +9,5 @@ ReactDOM.render(
     </RecoilRoot>,
     document.getElementById('root')
 );
-// const VKHeader = 48 + 15 + 55;
-
-// const getHeighApp = () => window.outerHeight - VKHeader - ((window.screen as any).availTop || 150);
-
-// console.log(window)
-
-// bridge.send("VKWebAppResizeWindow", { "width": 907, "height": getHeighApp() });
-// window.addEventListener("message", (data) => {
-//     bridge.send("VKWebAppResizeWindow", { "width": 907, "height": getHeighApp() });
-
-// });
 
 bridge.send('VKWebAppInit');
