@@ -1,8 +1,4 @@
 {
-  "extends": [
-    "plugin:react-hooks/recommended"
-  ],
-  "rules": {
-    "react-hooks/exhaustive-deps": "off"
-  }
+    "extends": ["react-app"],
+    "rules": {"react-hooks/exhaustive-deps": "off"}
 }

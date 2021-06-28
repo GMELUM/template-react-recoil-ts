@@ -1,18 +1,19 @@
+import { useCallbackState } from 'engine';
 import * as state from 'engine/state';
 import { FunctionComponent, useEffect } from 'react';
-import { useRecoilState } from 'recoil';
-import './style.css';
+import { useRecoilValue } from 'recoil';
 
 const App: FunctionComponent = () => {
-    const [count, setCount] = useRecoilState(state.COUNT);
+    const [getCount, setCount] = useCallbackState(state.COUNT);
+    const count = useRecoilValue(state.COUNT);
 
     useEffect(() => {
-        const timer = window.setTimeout(async () => {
-            setCount(count + 1);
+        const timer = window.setInterval(async () => {
+            let i = await getCount()
+            setCount(i + 1);
         }, 1000);
-
         return () => {
-            window.clearTimeout(timer);
+            window.clearInterval(timer);
         }
     }, [])
 
