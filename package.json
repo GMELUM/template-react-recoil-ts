@@ -3,23 +3,30 @@
     "version": "1.0.0",
     "private": true,
     "dependencies": {
+        "@gmelum/vkui": "^3.14.2-beta.2",
+        "@koale/useworker": "^4.0.2",
         "@vkontakte/icons": "^1.109.0",
         "@vkontakte/vk-bridge": "^2.4.2",
+        "@vkontakte/vkjs": "^0.21.0",
+        "axios": "^0.21.1",
         "core-js": "^3.9.0",
+        "immutability-helper": "^3.1.1",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
         "react-scripts": "4.0.3",
-        "recoil": "^0.3.1"
+        "recoil": "^0.3.1",
+        "throttle-debounce": "^3.0.1"
     },
     "devDependencies": {
         "@types/jest": "^26.0.23",
         "@types/node": "^15.12.4",
         "@types/react": "^17.0.11",
         "@types/react-dom": "^17.0.8",
+        "@types/throttle-debounce": "^2.1.0",
         "cross-env": "^7.0.3",
+        "eslint": "7.29.0",
         "eslint-plugin-react-hooks": "^4.2.0",
-        "typescript": "^4.3.4",
-        "eslint": "7.29.0"
+        "typescript": "^4.3.4"
     },
     "scripts": {
         "start": "cross-env PORT=18300 HTTPS=false react-scripts start",
