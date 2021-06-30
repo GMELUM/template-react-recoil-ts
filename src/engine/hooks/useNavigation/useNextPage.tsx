@@ -52,8 +52,6 @@ const useNextPage = () => {
         !isEqual(newSection, endSection) &&
             historyUpdate(options.activeView || activeView, activeHistory, newSection);
 
-
-
         activeUpdate(options, {
             activeView,
             activePanel,
@@ -64,25 +62,18 @@ const useNextPage = () => {
     };
 
     const activeUpdate = (state: TAppHistoryOptions, options: TAppHistoryOptions) => new Promise<boolean>((resolve, _) => {
-        let start = performance.now()
-        // тут функция
-        let result = performance.now() - start;
-        console.log(result);
-
         state.activeView && state.activeView !== options.activeView && setView(state.activeView);
         state.activePanel && state.activePanel !== options.activePanel && setPanel(state.activePanel);
         state.activePage && state.activePage !== options.activePage && setPage(state.activePage);
         state.activeModal && state.activeModal !== options.activeModal && setModal(state.activeModal);
         state.activePopout && state.activePopout !== options.activePopout && setPopout(state.activePopout);
-
-
-
         resolve(true);
     })
 
     const historyUpdate = (activeView: string, activeHistory: Map<string, TAppSector[]>, newSection: TAppSector) => new Promise<boolean>((resolve, _) => {
         const section = activeHistory.get(activeView)!;
         activeHistory.set(activeView, section.concat(newSection));
+        window.history.pushState(undefined, "");
         resolve(true);
     })
 

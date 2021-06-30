@@ -25,6 +25,7 @@ const App: FunctionComponent = () => {
 
     useEffect(() => {
         window.addEventListener('popstate', () => history.backPage());
+        window.history.pushState(undefined, "");
     }, [])
 
     const onStoryChange = (event: MouseEvent<HTMLDivElement>) =>

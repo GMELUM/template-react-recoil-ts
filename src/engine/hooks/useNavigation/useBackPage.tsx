@@ -41,12 +41,7 @@ const useBackPage = () => {
             newStory.activePage && setPage(newStory.activePage);
             newStory.activeModal && setModal(newStory.activeModal);
             newStory.activePopout && setPopout(newStory.activePopout);
-
-            console.log(activeSection);
-            console.log(newSection);
         }
-
-        console.log(activeSection)
     }
     return backPage;
 }
