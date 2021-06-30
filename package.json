@@ -4,7 +4,7 @@
     "private": true,
     "dependencies": {
         "@gmelum/vkui": "^3.14.2-beta.2",
-        "@koale/useworker": "^4.0.2",
+        "@koale/useworker": "4.0.0",
         "@vkontakte/icons": "^1.109.0",
         "@vkontakte/vk-bridge": "^2.4.2",
         "@vkontakte/vkjs": "^0.21.0",

@@ -5,6 +5,7 @@ import {
     PanelHeaderBack,
     Button
 } from '@gmelum/vkui';
+import { useNavigation } from 'engine';
 import { HTMLAttributes, FC } from 'react';
 
 interface TestPanelProps extends HTMLAttributes<HTMLDivElement> {
@@ -13,10 +14,11 @@ interface TestPanelProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const TestPanel: FC<TestPanelProps> = (props) => {
+    const history = useNavigation();
     const { text, title, id, children } = props;
     return (
         <Panel id={id}>
-            <PanelHeader left={<PanelHeaderBack />}>{title}</PanelHeader>
+            <PanelHeader left={<PanelHeaderBack onClick={() => history.backPage()} />}>{title}</PanelHeader>
             <Placeholder action={children}>
                 {text}
             </Placeholder>

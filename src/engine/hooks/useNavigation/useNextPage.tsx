@@ -1,7 +1,5 @@
-import { useCallbackState } from 'engine';
-import { TAppHistoryOptions, TAppHistory, TAppSector } from 'engine/types';
-
-import update from 'immutability-helper';
+import { useCallbackState, useCallbackValue } from 'engine';
+import { TAppHistoryOptions, TAppSector } from 'engine/types';
 
 import {
     APP_HISTORY,
@@ -12,17 +10,8 @@ import {
     ACTIVE_POPOUT,
 } from 'engine/state';
 
-type THistory = {
-    activeHistory: TAppHistory;
-    activeView: string;
-    activePanel: string;
-    activePage: string | number | undefined;
-    activeModal: string | undefined;
-    activePopout: React.ReactNode;
-}
-
 const useNextPage = () => {
-    const [getHistory, setHistory] = useCallbackState(APP_HISTORY);
+    const getHistory = useCallbackValue(APP_HISTORY);
     const [getView, setView] = useCallbackState(ACTIVE_VIEW);
     const [getPanel, setPanel] = useCallbackState(ACTIVE_PANEL);
     const [getPage, setPage] = useCallbackState(ACTIVE_PAGE);
@@ -30,16 +19,14 @@ const useNextPage = () => {
     const [getPopout, setPopout] = useCallbackState(ACTIVE_POPOUT);
 
     const nextPage = async (options: TAppHistoryOptions) => {
-        const history = {
-            activeHistory: await getHistory(),
-            activeView: await getView(),
-            activePanel: await getPanel(),
-            activePage: await getPage(),
-            activeModal: await getModal(),
-            activePopout: await getPopout()
-        };
+        const activeHistory = await getHistory();
+        const activeView = await getView();
+        const activePanel = await getPanel();
+        const activePage = await getPage();
+        const activeModal = await getModal();
+        const activePopout = await getPopout();
 
-        const section = history.activeHistory[options.activeView || history.activeView];
+        const section = activeHistory.get(options.activeView || activeView)!;
         const endSection = section[section.length - 1];
         const keys = Object.keys(endSection).reverse();
 
@@ -63,22 +50,41 @@ const useNextPage = () => {
         };
 
         !isEqual(newSection, endSection) &&
-            historyUpdate(options.activeView || history.activeView, history, newSection);
+            historyUpdate(options.activeView || activeView, activeHistory, newSection);
 
-        activeUpdate(options);
+
+
+        activeUpdate(options, {
+            activeView,
+            activePanel,
+            activePage,
+            activeModal,
+            activePopout,
+        });
     };
 
-    const activeUpdate = (state: TAppHistoryOptions) => {
-        state.activeView && setView(state.activeView);
-        state.activePanel && setPanel(state.activePanel);
-        state.activePage && setPage(state.activePage);
-        state.activeModal && setModal(state.activeModal);
-        state.activePopout && setPopout(state.activePopout);
-    }
+    const activeUpdate = (state: TAppHistoryOptions, options: TAppHistoryOptions) => new Promise<boolean>((resolve, _) => {
+        let start = performance.now()
+        // тут функция
+        let result = performance.now() - start;
+        console.log(result);
 
-    const historyUpdate = (activeView: string, history: THistory, newSection: TAppSector) => {
-        setHistory(update(history.activeHistory, { [activeView]: { $push: [newSection] } }));
-    }
+        state.activeView && state.activeView !== options.activeView && setView(state.activeView);
+        state.activePanel && state.activePanel !== options.activePanel && setPanel(state.activePanel);
+        state.activePage && state.activePage !== options.activePage && setPage(state.activePage);
+        state.activeModal && state.activeModal !== options.activeModal && setModal(state.activeModal);
+        state.activePopout && state.activePopout !== options.activePopout && setPopout(state.activePopout);
+
+
+
+        resolve(true);
+    })
+
+    const historyUpdate = (activeView: string, activeHistory: Map<string, TAppSector[]>, newSection: TAppSector) => new Promise<boolean>((resolve, _) => {
+        const section = activeHistory.get(activeView)!;
+        activeHistory.set(activeView, section.concat(newSection));
+        resolve(true);
+    })
 
     const isEqual = (first: TAppHistoryOptions, second: TAppHistoryOptions): boolean => {
         let result: boolean[] = [];

@@ -1,5 +1,5 @@
 import *  as state from 'engine/state';
-import { FunctionComponent, MouseEvent } from 'react';
+import { FunctionComponent, MouseEvent, useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import {
@@ -22,6 +22,10 @@ import { TestView } from 'components';
 const App: FunctionComponent = () => {
     const history = useNavigation();
     const activeView = useRecoilValue(state.ACTIVE_VIEW);
+
+    useEffect(() => {
+        window.addEventListener('popstate', () => history.backPage());
+    }, [])
 
     const onStoryChange = (event: MouseEvent<HTMLDivElement>) =>
         history.nextPage({ activeView: event.currentTarget.dataset.story });
