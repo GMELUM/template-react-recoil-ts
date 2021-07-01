@@ -48,17 +48,11 @@ const useBackPage = () => {
             let newStory = (newSection[newSection.length - 1]);
 
             if (!activeSection[activeSection.length - 1].ignoreBack || forceBack) {
-
-                // const start = performance.now()
-
                 activeHistory.set(activeView, newSection);
                 activePanel !== newStory.activePanel && setPanel(newStory.activePanel);
                 activePage !== newStory.activePage && setPage(newStory.activePage);
                 activeModal !== newStory.activeModal && setModal(newStory.activeModal);
                 activePopout !== newStory.activePopout && setPopout(newStory.activePopout);
-
-                // const end = performance.now();
-                // console.log(end - start)
             } else { window.history.pushState(undefined, ""); }
         }
 
