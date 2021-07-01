@@ -10,7 +10,7 @@ import {
     View,
 } from '@gmelum/vkui';
 
-import { TestModal, TestPanel, TestPopout } from 'components';
+import { TestModal, TestPanel } from 'components';
 import { useNavigation } from 'engine';
 
 interface TestViewProps extends HTMLAttributes<HTMLDivElement> { }
@@ -19,7 +19,7 @@ const TestView: FC<TestViewProps> = (props) => {
     const history = useNavigation();
     const activePanel = useRecoilValue(ACTIVE_PANEL);
     const activePopout = useRecoilValue(ACTIVE_POPOUT);
-    
+
     const { id } = props;
 
     const handleNextPage = (event: MouseEvent<HTMLButtonElement>) =>

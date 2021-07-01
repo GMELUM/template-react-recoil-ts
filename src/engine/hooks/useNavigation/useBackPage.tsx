@@ -1,5 +1,6 @@
-import { throttle } from 'throttle-debounce';
 import bridge from "@vkontakte/vk-bridge";
+import { throttle } from 'throttle-debounce';
+import { useCallbackState, useCallbackValue } from 'engine';
 
 import {
     APP_HISTORY,
@@ -10,17 +11,15 @@ import {
     ACTIVE_POPOUT,
 } from 'engine/state';
 
-import { useCallbackState, useCallbackValue } from 'engine';
-
 const useBackPage = () => {
     const getHistory = useCallbackValue(APP_HISTORY);
-    const [getView, setView] = useCallbackState(ACTIVE_VIEW);
+    const getView = useCallbackValue(ACTIVE_VIEW);
     const [getPanel, setPanel] = useCallbackState(ACTIVE_PANEL);
     const [getPage, setPage] = useCallbackState(ACTIVE_PAGE);
     const [getModal, setModal] = useCallbackState(ACTIVE_MODAL);
     const [getPopout, setPopout] = useCallbackState(ACTIVE_POPOUT);
 
-    const backPage = async (forceBack: boolean = false, closeLowLevel: boolean = false) => {
+    const backPage = throttle(250, async (forceBack: boolean = false, closeLowLevel: boolean = false) => {
 
         const activeHistory = await getHistory();
         const activeView = await getView();
@@ -56,7 +55,8 @@ const useBackPage = () => {
             } else { window.history.pushState(undefined, ""); }
         }
 
-    }
+    });
+
     return backPage;
 }
 

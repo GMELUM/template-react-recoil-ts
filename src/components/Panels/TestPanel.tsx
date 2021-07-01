@@ -2,8 +2,7 @@ import {
     Panel,
     PanelHeader,
     Placeholder,
-    PanelHeaderBack,
-    Button
+    PanelHeaderBack
 } from '@gmelum/vkui';
 import { useNavigation } from 'engine';
 import { HTMLAttributes, FC } from 'react';
