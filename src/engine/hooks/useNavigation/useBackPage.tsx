@@ -20,7 +20,8 @@ const useBackPage = () => {
     const [getModal, setModal] = useCallbackState(ACTIVE_MODAL);
     const [getPopout, setPopout] = useCallbackState(ACTIVE_POPOUT);
 
-    const backPage = async () => {
+    const backPage = async (forceBack: boolean = false, closeLowLevel: boolean = false) => {
+
         const activeHistory = await getHistory();
         const activeView = await getView();
         const activePanel = await getPanel();
@@ -28,20 +29,39 @@ const useBackPage = () => {
         const activeModal = await getModal();
         const activePopout = await getPopout();
 
-        const activeSection = activeHistory.get(activeView)!;
+        let activeSection = activeHistory.get(activeView)!;
+        let newSection = [];
 
-        if (activeSection.length === 1) {
+        if (closeLowLevel) {
+            let deleteToEnd = 0;
+            for (let i = activeSection.length; i >= 1; i--) {
+                if (activeSection[i]?.activePopout || activeSection[i]?.activeModal) {
+                    deleteToEnd++;
+                }
+            }
+            newSection = activeSection.slice(0, (deleteToEnd * -1));
+        } else { newSection = activeSection.slice(0, -1); };
+
+        if (activeSection.length === 1 && !closeLowLevel) {
             bridge.send("VKWebAppClose", { "status": "success" });
         } else if (activeSection.length > 1) {
-            const newSection = activeSection.slice(0, -1);
             let newStory = (newSection[newSection.length - 1]);
 
-            activeHistory.set(activeView, newSection);
-            newStory.activePanel && setPanel(newStory.activePanel);
-            newStory.activePage && setPage(newStory.activePage);
-            newStory.activeModal && setModal(newStory.activeModal);
-            newStory.activePopout && setPopout(newStory.activePopout);
+            if (!activeSection[activeSection.length - 1].ignoreBack || forceBack) {
+
+                // const start = performance.now()
+
+                activeHistory.set(activeView, newSection);
+                activePanel !== newStory.activePanel && setPanel(newStory.activePanel);
+                activePage !== newStory.activePage && setPage(newStory.activePage);
+                activeModal !== newStory.activeModal && setModal(newStory.activeModal);
+                activePopout !== newStory.activePopout && setPopout(newStory.activePopout);
+
+                // const end = performance.now();
+                // console.log(end - start)
+            } else { window.history.pushState(undefined, ""); }
         }
+
     }
     return backPage;
 }

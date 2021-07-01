@@ -9,6 +9,7 @@ export type TAppSector = {
     activePage?: string | number;
     activeModal?: string;
     activePopout?: ReactNode;
+    ignoreBack?: boolean;
 }
 
 export type TAppHistoryOptions = {
