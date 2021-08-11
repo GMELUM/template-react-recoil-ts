@@ -8,6 +8,7 @@ import {
 import {
     Button,
     View,
+    Div
 } from '@gmelum/vkui';
 
 import { TestModal, TestPanel } from 'components';
@@ -31,13 +32,30 @@ const TestView: FC<TestViewProps> = (props) => {
             popout={activePopout}
             modal={<TestModal />}>
             <TestPanel id="main" title="Основная" text="ОСНОВНАЯ ПАНЕЛЬ">
-                <Button name="first" onClick={handleNextPage}>На первую панель</Button>
-                <Button onClick={() => history.nextPage({ activeModal: "firstModal" })}>Открыть модалку</Button>
+                <Div style={{display: 'flex'}}>
+                    <Button
+                        stretched
+                        size="l"
+                        name="first"
+                        onClick={handleNextPage}
+                        style={{ marginRight: 8 }}>
+                        На первую панель
+                    </Button>
+
+                    <Button
+                        stretched
+                        size="l"
+                        mode="secondary"
+                        onClick={() =>
+                            history.nextPage({ activeModal: "firstModal" })}>
+                        Открыть модалку
+                    </Button>
+                </Div>
             </TestPanel>
-            <TestPanel id="first" title="Первая" text="ПЕРВАЯ ПАНЕЛЬ"><Button name="seconds" onClick={handleNextPage}>На вторую панель</Button></TestPanel>
-            <TestPanel id="seconds" title="Вторая" text="ВТОРАЯ ПАНЕЛЬ"><Button name="third" onClick={handleNextPage}>На третью панель</Button></TestPanel>
-            <TestPanel id="third" title="Третья" text="ТРЕТЬЯ ПАНЕЛЬ"><Button name="fourth" onClick={handleNextPage}>На четвертую панель</Button></TestPanel>
-            <TestPanel id="fourth" title="Четвертая" text="ЧЕТВЕРТАЯ ПАНЕЛЬ"><Button name="main" onClick={handleNextPage}>На основную панель</Button></TestPanel>
+            <TestPanel id="first" title="Первая" text="ПЕРВАЯ ПАНЕЛЬ"><Button size="l" name="seconds" onClick={handleNextPage}>На вторую панель</Button></TestPanel>
+            <TestPanel id="seconds" title="Вторая" text="ВТОРАЯ ПАНЕЛЬ"><Button size="l" name="third" onClick={handleNextPage}>На третью панель</Button></TestPanel>
+            <TestPanel id="third" title="Третья" text="ТРЕТЬЯ ПАНЕЛЬ"><Button size="l" name="fourth" onClick={handleNextPage}>На четвертую панель</Button></TestPanel>
+            <TestPanel id="fourth" title="Четвертая" text="ЧЕТВЕРТАЯ ПАНЕЛЬ"><Button size="l" name="main" onClick={handleNextPage}>На основную панель</Button></TestPanel>
         </View>
     )
 }
