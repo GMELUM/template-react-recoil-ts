@@ -2,10 +2,10 @@ import { FC } from 'react';
 import {
     Alert
 } from '@gmelum/vkui';
-import { useNavigation } from 'engine';
+import { useRoute } from 'engine';
 
 const TestPopout: FC = () => {
-    const history = useNavigation();
+    const history = useRoute();
     return (
         <Alert
             actions={[{

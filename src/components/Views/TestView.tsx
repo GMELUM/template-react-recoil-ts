@@ -11,12 +11,12 @@ import {
 } from '@gmelum/vkui';
 
 import { TestModal, TestPanel } from 'components';
-import { useNavigation } from 'engine';
+import { useRoute } from 'engine';
 
 interface TestViewProps extends HTMLAttributes<HTMLDivElement> { }
 
 const TestView: FC<TestViewProps> = (props) => {
-    const history = useNavigation();
+    const history = useRoute();
     const activePanel = useRecoilValue(ACTIVE_PANEL);
     const activePopout = useRecoilValue(ACTIVE_POPOUT);
 

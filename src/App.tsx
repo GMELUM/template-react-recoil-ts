@@ -15,12 +15,11 @@ import {
     Tabbar,
     TabbarItem
 } from '@gmelum/vkui';
-import { useNavigation } from 'engine';
+import { useRoute } from 'engine';
 import { TestView } from 'components';
 
-
 const App: FunctionComponent = () => {
-    const history = useNavigation();
+    const history = useRoute();
     const activeView = useRecoilValue(state.ACTIVE_VIEW);
 
     useEffect(() => {

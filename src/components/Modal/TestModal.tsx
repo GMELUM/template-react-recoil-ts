@@ -8,13 +8,13 @@ import {
     Icon28SubtitlesOutline
 } from '@vkontakte/icons';
 
-import { useNavigation } from 'engine';
+import { useRoute } from 'engine';
 import { ACTIVE_MODAL } from 'engine/state';
 import { useRecoilValue } from 'recoil';
 import { TestPopout } from 'components';
 
 const TestModal: FC = () => {
-    const history = useNavigation();
+    const history = useRoute();
     const activeModal = useRecoilValue(ACTIVE_MODAL);
     return (
         <ModalRoot

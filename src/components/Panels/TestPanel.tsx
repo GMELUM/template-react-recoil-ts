@@ -4,7 +4,7 @@ import {
     Placeholder,
     PanelHeaderBack
 } from '@gmelum/vkui';
-import { useNavigation } from 'engine';
+import { useRoute } from 'engine';
 import { HTMLAttributes, FC } from 'react';
 
 interface TestPanelProps extends HTMLAttributes<HTMLDivElement> {
@@ -13,7 +13,7 @@ interface TestPanelProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const TestPanel: FC<TestPanelProps> = (props) => {
-    const history = useNavigation();
+    const history = useRoute();
     const { text, title, id, children } = props;
     return (
         <Panel id={id}>
