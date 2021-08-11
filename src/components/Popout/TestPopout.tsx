@@ -14,9 +14,9 @@ const TestPopout: FC = () => {
                 mode: 'cancel',
                 action: () => history.backPage(true)
             }, {
-                title: 'Закрыть lowlevel',
+                title: 'Закрыть все',
                 autoclose: false,
-                mode: 'cancel',
+                mode: 'destructive',
                 action: () => history.backPage(true, true)
             }]}
             onClose={() => history.backPage(true)}

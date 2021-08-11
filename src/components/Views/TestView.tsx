@@ -32,7 +32,7 @@ const TestView: FC<TestViewProps> = (props) => {
             modal={<TestModal />}>
             <TestPanel id="main" title="Основная" text="ОСНОВНАЯ ПАНЕЛЬ">
                 <Button name="first" onClick={handleNextPage}>На первую панель</Button>
-                <Button onClick={() => history.nextPage({ activeModal: "money_send" })}>Открыть модалку</Button>
+                <Button onClick={() => history.nextPage({ activeModal: "firstModal" })}>Открыть модалку</Button>
             </TestPanel>
             <TestPanel id="first" title="Первая" text="ПЕРВАЯ ПАНЕЛЬ"><Button name="seconds" onClick={handleNextPage}>На вторую панель</Button></TestPanel>
             <TestPanel id="seconds" title="Вторая" text="ВТОРАЯ ПАНЕЛЬ"><Button name="third" onClick={handleNextPage}>На третью панель</Button></TestPanel>

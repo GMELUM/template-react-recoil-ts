@@ -5,8 +5,7 @@ import {
 } from '@gmelum/vkui';
 
 import {
-    Icon56MoneyTransferOutline,
-    Icon56NotificationOutline
+    Icon28SubtitlesOutline
 } from '@vkontakte/icons';
 
 import { useNavigation } from 'engine';
@@ -23,30 +22,31 @@ const TestModal: FC = () => {
             onClose={() => history.backPage()}
         >
             <ModalCard
-                id={"money_send"}
+                id="firstModal"
                 onClose={() => history.backPage()}
-                icon={<Icon56MoneyTransferOutline />}
-                header="Отправляйте деньги друзьям, используя банковскую карту"
-                caption="Номер карты получателя не нужен — он сам решит, куда зачислить средства."
+                icon={<Icon28SubtitlesOutline width={56} height={56} />}
+                header="Первое модальное окно"
+                caption="Нажмите 'Далее' для открытия второго модального окна"
                 actions={[{
-                    title: 'Попробовать',
+                    title: 'Далее',
                     mode: 'primary',
-                    action: () => history.nextPage({ activeModal: "notification" })
+                    action: () => history.nextPage({ activeModal: "secondsModal" })
                 }]}
             >
             </ModalCard>
 
             <ModalCard
-                id={"notification"}
+                id="secondsModal"
                 onClose={() => history.backPage(false, true)}
-                icon={<Icon56NotificationOutline />}
-                header="Приложение запрашивает разрешение на отправку Вам уведомлений"
+                icon={<Icon28SubtitlesOutline width={56} height={56} />}
+                header="Второе модальное окно"
+                caption="Нажмите 'Далее' для открытия всплывающего окна"
                 actions={[{
-                    title: 'Запретить',
+                    title: 'Назад',
                     mode: 'secondary',
                     action: () => history.backPage()
                 }, {
-                    title: 'Разрешить',
+                    title: 'Далее',
                     mode: 'primary',
                     action: () => history.nextPage({ activePopout: <TestPopout /> }, true)
                 }]}

@@ -62,22 +62,20 @@ const useNextPage = () => {
         });
     };
 
-    const activeUpdate = (state: TAppHistoryOptions, options: TAppHistoryOptions) => new Promise<boolean>((resolve, _) => {
+    const activeUpdate = async (state: TAppHistoryOptions, options: TAppHistoryOptions) => {
         state.activeView && state.activeView !== options.activeView && setView(state.activeView);
         state.activePanel && state.activePanel !== options.activePanel && setPanel(state.activePanel);
         state.activePage && state.activePage !== options.activePage && setPage(state.activePage);
         state.activeModal && state.activeModal !== options.activeModal && setModal(state.activeModal);
         state.activePopout && state.activePopout !== options.activePopout && setPopout(state.activePopout);
-        resolve(true);
-    })
+    }
 
-    const historyUpdate = (activeView: string, activeHistory: Map<string, TAppSector[]>, newSection: TAppSector) => new Promise<boolean>((resolve, _) => {
+    const historyUpdate = async (activeView: string, activeHistory: Map<string, TAppSector[]>, newSection: TAppSector) => {
         const section = activeHistory.get(activeView)!;
         activeHistory.set(activeView, section.concat(newSection));
         console.log(activeHistory)
         window.history.pushState(undefined, "");
-        resolve(true);
-    })
+    }
 
     const isEqual = (first: TAppHistoryOptions, second: TAppHistoryOptions): boolean => {
         let result: boolean[] = [];
