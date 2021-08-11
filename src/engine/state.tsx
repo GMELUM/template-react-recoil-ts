@@ -2,13 +2,12 @@ import { ReactNode } from 'react';
 import { atom } from 'recoil';
 import { TAppSector } from 'engine/types';
 
-
 /**
- * Global stories atom. Do not change this section
- * for the navigation to work correctly
+ * Этот блок кода отвечает за навигацию в сервисе.
+ * Не рекомендуется изменять константы кроме 'defaultView' и 'defaultActive'
  */
 
-export const activeView = "feed";
+export const defaultView = "feed";
 
 export const defaultActive: TAppSector = {
     activePanel: "main",
@@ -18,15 +17,14 @@ export const defaultActive: TAppSector = {
     ignoreBack: false,
 }
 
-const mapHistory = new Map<string, TAppSector[]>();
-mapHistory
+const mapHistory = new Map<string, TAppSector[]>()
     .set("feed", [defaultActive])
     .set("services", [defaultActive])
     .set("messages", [defaultActive])
     .set("clips", [defaultActive])
     .set("profile", [defaultActive]);
 
-export const ACTIVE_VIEW = atom<string>({ key: "active_view", default: activeView });
+export const ACTIVE_VIEW = atom<string>({ key: "active_view", default: defaultView });
 export const ACTIVE_PANEL = atom<string>({ key: "active_panel", default: defaultActive.activePanel });
 export const ACTIVE_PAGE = atom<string | number | undefined>({ key: "active_page", default: defaultActive.activePage });
 export const ACTIVE_MODAL = atom<string | undefined>({ key: "active_modal", default: defaultActive.activeModal });
