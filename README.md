@@ -56,13 +56,13 @@ const  mapHistory = new  Map<string, TAppSector[]>()
 ```js
 history.nextPage({}, true | false);
 
-type TNextPage = ({
+type TNextPage = (options: {
 	activeView?: string;
 	activePanel?: string;
 	activePage?: string | number;
 	activeModal?: string;
-	activePopout?: ReactNode;
-}, ignoreBack: boolean = false);
+	activePopout?: string;
+}, ignoreBack: boolean ) => void;
 ```
 
 ### backPage
