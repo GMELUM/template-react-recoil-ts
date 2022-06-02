@@ -1,36 +1,34 @@
 {
-    "compilerOptions": {
-      "jsx": "react-jsx",
-      "target": "esnext",
-      "downlevelIteration": true,
-      "lib": [
-        "es6",
-        "dom"
-      ],
-      "allowJs": true,
-      "skipLibCheck": true,
-      "esModuleInterop": true,
-      "allowSyntheticDefaultImports": true,
-      "strict": true,
-      "forceConsistentCasingInFileNames": true,
-      "noFallthroughCasesInSwitch": true,
-      "module": "esnext",
-      "moduleResolution": "node",
-      "resolveJsonModule": true,
-      "isolatedModules": true,
-      "noEmit": true,
-      "baseUrl": "./src/",
-      "removeComments": true,
-      "sourceMap": false,
-      "allowUnreachableCode": true,
-      "declaration": false,
-    },
-    "include": [
-      "src/**/*.ts",
-      "src/**/*.tsx"
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "target": "esnext",
+    "module": "esnext",
+    "baseUrl": "./src/",
+    "lib": [
+      "dom",
+      "esnext",
+      "WebWorker"
     ],
-    "exclude": [
-      "node_modules"
-    ]
-  }
-  
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "removeComments": true,
+    "sourceMap": false,
+    "allowUnreachableCode": true,
+    "declaration": false,
+    "declarationMap": false,
+    "charset": "utf8",
+  },
+  "include": [
+    "./src/**/*",
+    "./public/**/*"
+  ],
+}
